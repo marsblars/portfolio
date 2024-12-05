@@ -1,13 +1,16 @@
-import React, { useRef, useEffect } from "react";
-import { useGLTF, useAnimations } from "@react-three/drei";
+import React, { useRef, useEffect, createContext } from "react";
+import { useGLTF, useAnimations, PresentationControls } from "@react-three/drei";
 import { a } from '@react-spring/three';
 import Scene from '../assets1/3d/islandd.glb';
+
+
 
 const Island = (props) => {
 
   const group = useRef();
   const { nodes, materials, animations } = useGLTF(Scene);
   const { actions } = useAnimations(animations, group);
+  console.log(actions);
   useEffect(() => {
     Object.keys(actions).forEach((key) => {
    actions[key].play();
@@ -1000,6 +1003,7 @@ const Island = (props) => {
         />
       </group>
     </group>
+  
   );
 }
 

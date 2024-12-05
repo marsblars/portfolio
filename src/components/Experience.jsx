@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import { Environment, OrbitControls } from "@react-three/drei";
+import { Map } from "./Map";
 
-const Experience = () => {
+export const Experience = () => {
   return (
-    <div>Experience</div>
-  )
-}
+    <>
 
-export default Experience
+    <Map  />
+    
+    <Environment preset="sunset" />
+    </>
+  );
+};
+

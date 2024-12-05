@@ -5,5 +5,6 @@ import path from 'path'
 // https://vitejs.dev/npconfig/
 export default defineConfig({
   plugins: [react()],
-  assetsInclude: ['./src/assets1/3d/*.glb']
+  assetsInclude: ['./src/assets1/3d/*.glb', './public/*.glb', '*.glb']
+  
 })

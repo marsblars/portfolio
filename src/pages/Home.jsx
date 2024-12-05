@@ -5,15 +5,20 @@ import Loader from '../components/Loader'
 import Island from '../models/island'
 import Sky from '../models/sky'
 import Night from '../models/night'
-import { OrbitControls, Stars } from "@react-three/drei";
-import Switch from '../components/Switch'
+import Turtle from '../models/turtle'
+import { OrbitControls, Stars, Center, PresentationControls, MeshPortalMaterial, RoundedBox, Float} from "@react-three/drei";
+import Portal from '../models/portal'
 import ReactSwitch from 'react-switch';
 import '../dist/main.css';
+import Test from './Test';
 
 export const ThemeContext = createContext(null);
 
+
 const Home = () => {
   const [theme, setTheme] = useState('light');
+  const [isRotating, setIsRotating] = useState(false);
+  const [active, setActive] = useState(null);
 
   const toggleTheme = () => {
     setTheme((curr) => (curr === 'light' ? 'dark' : 'light'));
@@ -23,8 +28,8 @@ const Home = () => {
 
   const adjustIslandForScreenSize = () => {
     let screenScale = null;
-    let screenPosition = [-5,-30.845,-200.393];
-    let rotation = [0.2, -4.65, 0];
+    let screenPosition = [-5,-45.845,-500];
+    let rotation = [-0.05, -4.65, 0];
 
     if(window.innerWidth < 768) {
       screenScale = [0.9, 0.9, 0.9];
@@ -44,8 +49,10 @@ const Home = () => {
     position = {islandPosition}
     scale = {islandScale}
     rotation = {rotation}
+    isRotating = {isRotating}
+    setIsRotating = {setIsRotating}
     />
-    <Sky  />
+
       </mesh>
     );
   }
@@ -57,9 +64,11 @@ const Home = () => {
     position = {islandPosition}
     scale = {islandScale}
     rotation = {rotation}
+    isRotating = {isRotating}
+    setIsRotating = {setIsRotating}
     />
-    <Stars radius={110} depth={100} count={5000} factor={4} saturation={0} fade speed={1} />
-    <Sky rotation={[-Math.PI / 1.5, 0, -10]} />
+    <Stars radius={110} depth={300} count={5000} factor={4} saturation={0} fade speed={1} />
+  
       </mesh>
     );
   }
@@ -67,25 +76,32 @@ const Home = () => {
    const SelectedCanvas = theme === 'light' ? islandLight : islandNight; 
 
   return (
-<ThemeContext.Provider value={{ theme, toggleTheme }}>   
-<section className='w-full h-screen relative '>
-       <div  className='absolute top-5 left-0 right-0 z-10 flex items-center justify-center'>
+<ThemeContext.Provider value={{ theme, toggleTheme }} active={active}
+  setActive={setActive}>   
+<section className='w-full h-screen relative'>
+       <div  className='absolute  left-10 right-10 z-10 flex items-center justify-center'>
        <ReactSwitch 
-          className='react-switch' 
+          className='' 
           checked={theme === 'light'} 
           onChange={toggleTheme} 
-          handleDiameter={28}
-          height={40}
-          width={70}
-          offColor="#08f"
-          offHandleColor="#0ff"
-
+          onColor="#86d3ff"
+          onHandleColor="#ffffff"
+          offHandleColor='#2693e6'
+          handleDiameter={20}
+          uncheckedIcon={false}
+          checkedIcon={false}
+          boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+          activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+          height={15}
+          width={5}
           />
+          
       </div> 
 <Canvas 
   className='w-full h-screen bg-black'
   camera={{ near: 0.1, far: 1000 }}
   alpha={'true'}
+  
 >
     <Suspense fallback={<loader />}>
     <directionalLight
@@ -110,9 +126,37 @@ const Home = () => {
     />
  
 
+    <Center>
 
-
+    <Float rotationIntensity={0} floatIntensity={1} speed={3} floatingRange={[-2, 2]}>
     <SelectedCanvas />
+
+    <RoundedBox args={[65,75,0.1]} position={[2,-20.845,-540]}  radius={2} onDoubleClick={() => setActive(active)}>
+    
+    <MeshPortalMaterial>
+    <ambientLight 
+    intensity={1.5}
+    /> 
+
+    <Test 
+
+    />
+    </MeshPortalMaterial>
+    </RoundedBox>
+
+    </Float>
+
+      
+
+
+
+    <Sky /> 
+
+
+
+    </Center>      
+
+
 
   </Suspense>
 

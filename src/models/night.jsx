@@ -824,7 +824,7 @@ const Night = (props) => {
         <mesh
           name="coladezorro137002"
           geometry={nodes.coladezorro137002.geometry}
-          material={materials["Material #6.008"]}
+          material={materials["Material #6"]}
           position={[-10.912, -8.275, -6.675]}
           rotation={[-0.018, -0.002, 0.078]}
           scale={2.075}
@@ -832,7 +832,7 @@ const Night = (props) => {
         <mesh
           name="coladezorro137003"
           geometry={nodes.coladezorro137003.geometry}
-          material={materials["Material #6.008"]}
+          material={materials["Material #6"]}
           position={[-10.912, -8.275, -6.675]}
           rotation={[-0.018, -0.002, 0.078]}
           scale={2.075}
@@ -864,7 +864,7 @@ const Night = (props) => {
         <mesh
           name="coladezorro208002"
           geometry={nodes.coladezorro208002.geometry}
-          material={materials["Material #6.008"]}
+          material={materials["Material #6"]}
           position={[72.563, -7.925, 36.283]}
           rotation={[-0.018, 0.005, 0.06]}
           scale={2.075}
